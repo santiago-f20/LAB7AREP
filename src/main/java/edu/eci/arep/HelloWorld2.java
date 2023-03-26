@@ -3,14 +3,14 @@ package edu.eci.arep;
 import static spark.Spark.*;
 import static edu.eci.arep.SecureURLReader.*;
 
-public class HelloWorld {
+public class HelloWorld2 {
     // java -jar app-1.0-SNAPSHOT-jar-with-dependencies.jar
-    // java -cp target/classes;target/dependency/* edu.eci.arep.HelloWorld
+    // java -cp target/classes;target/dependency/* edu.eci.arep.HelloWorld2
     public static void main(String[] args) {
         port(getPort());
         secure(getKeyStore(), getKeyStorePwd(), null, null);
         loadTrustStore(getTrustStore(), getKeyStorePwd());
-        get("hello", (req, res) -> "Hello from app 1");
+        get("hello", (req, res) -> "Hello from app 2");
         get("remote", (req, res) -> readURL(getLink()));
     }
 
@@ -18,7 +18,7 @@ public class HelloWorld {
         if (System.getenv("PORT") != null) {
             return Integer.parseInt(System.getenv("PORT"));
         }
-        return 5000; // returns default port if heroku-port isn't set (i.e. on localhost)
+        return 5001; // returns default port if heroku-port isn't set (i.e. on localhost)
     }
 
     static String getKeyStore() {
@@ -46,6 +46,6 @@ public class HelloWorld {
         if (System.getenv("LINK") != null) {
             return System.getenv("LINK");
         }
-        return "ec2-54-157-160-169.compute-1.amazonaws.com:5001/hello";
+        return "ec2-44-202-27-53.compute-1.amazonaws.com:5000/hello";
     }
 }
